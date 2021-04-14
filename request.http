@@ -1,0 +1,20 @@
+### Post "Bulbasaur"
+POST http://localhost:8080/
+Content-Type: application/json
+Authorization: Basic sa password
+
+{
+  "name": "Bulbasaur",
+  "types": "'poison', 'grass'",
+  "height": "7",
+  "weight": "69",
+  "abilities": "chlorophyll, overgrow",
+  "egg_groups": "'plant', 'monster'",
+  "stats": "hp: 45, speed: 45, attack: 49, defense: 49, special-attack: 65, special-defense: 65",
+  "genus": "Seed Pokémon",
+  "description": "Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun’s rays, the seed grows progressively larger."
+}
+
+### Get all the messages
+GET http://localhost:8080/
+Authorization: Basic sa password
