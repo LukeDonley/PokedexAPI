@@ -1,17 +1,25 @@
 package pokedex.model
 
-import org.springframework.data.annotation.Id
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.relational.core.mapping.Table
-import javax.persistence.OneToMany
+import javax.persistence.*
 
-@Table("TRAINERS")
+@Entity
+@Table("TRAINER")
 data class Trainer (
     @Id
-    val id: String?,
+    val id: Long?,
     val name: String?,
+    @Column(unique=true)
     val email: String?,
+    @JsonIgnore
     val password: String?,
-    @OneToMany
-    val pokemon: Set<Pokemon>?
+    @ManyToMany
+    @JoinTable(
+        name = "caught_pokemon",
+        joinColumns=[JoinColumn(name="trainer_id", referencedColumnName="id")],
+        inverseJoinColumns=[JoinColumn(name="pokemon_id", referencedColumnName="id")]
+    )
+    val caught_pokemon: MutableList<Pokemon>? = mutableListOf()
 
 )

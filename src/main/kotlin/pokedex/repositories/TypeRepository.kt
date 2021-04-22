@@ -5,10 +5,14 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.PagingAndSortingRepository
 import pokedex.model.Pokemon
-import pokedex.model.Trainer
+import pokedex.model.Type
 
-interface TrainerRepository : PagingAndSortingRepository<Trainer, String>, JpaSpecificationExecutor<Trainer> {
+interface TypeRepository : PagingAndSortingRepository<Type, String>, JpaSpecificationExecutor<Type> {
 
-//    @Query("select * from trainers")
-//    fun findAllTrainers(): List<Trainer>
+//    @Query("select * from types")
+//    fun findAllTypes(): List<Type>
+//
+//    @Query(value = "select t from type t where t.type = ?1")
+//    fun findByType(type: String): Type
 }
+

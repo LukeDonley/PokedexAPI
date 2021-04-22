@@ -1,25 +1,47 @@
 package pokedex.model
 
-import org.springframework.data.annotation.Id
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.relational.core.mapping.Table
-import javax.persistence.ManyToMany
-import javax.persistence.OneToOne
+import javax.persistence.*
 
+@Entity
 @Table("POKEMON")
 data class Pokemon(
-        @Id
-        val id: String?,
+        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        val id: Long = 0,
+        @Column(unique=true)
         val name: String?,
         val height: Int?,
         val weight: Int?,
-        val stats: String?,
         val description: String?,
+        val stats: String?,
+        val genus: String?,
+
         @ManyToMany
-        val abilities: Set<Ability>?,
+        @JoinTable(
+                name = "pokemon_abilities",
+                joinColumns=[JoinColumn(name="pokemon_id", referencedColumnName="id")],
+                inverseJoinColumns=[JoinColumn(name="ability_id", referencedColumnName="id")]
+        )
+        val abilities: MutableList<Ability>? = mutableListOf(),
+
         @ManyToMany
-        val types: Set<Type>?,
+        @JoinTable(
+                name = "pokemon_types",
+                joinColumns=[JoinColumn(name="pokemon_id", referencedColumnName="id")],
+                inverseJoinColumns=[JoinColumn(name="type_id", referencedColumnName="id")]
+        )
+        val types: MutableList<Type>? = mutableListOf(),
+
         @ManyToMany
-        val egg_groups: Set<EggGroup>?,
-        @OneToOne
-        val genus: Genus?
+        @JoinTable(
+                name = "pokemon_egg_groups",
+                joinColumns=[JoinColumn(name="pokemon_id", referencedColumnName="id")],
+                inverseJoinColumns=[JoinColumn(name="egg_group_id", referencedColumnName="id")]
+        )
+        val egg_groups: MutableList<EggGroup>? = mutableListOf(),
+
+//        @ManyToMany(mappedBy = "caught_pokemon")
+//        @JsonIgnore
+//        val trainers: MutableList<Trainer>? = mutableListOf()
 )

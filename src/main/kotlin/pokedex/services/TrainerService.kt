@@ -9,9 +9,9 @@ import pokedex.repositories.TrainerRepository
 @Service
 class TrainerService(val db: TrainerRepository) {
 
-    fun findAllTrainers(): List<Trainer> = db.findAllTrainers()
+    fun findAllTrainers(): MutableIterable<Trainer> = db.findAll()
 
-    fun post(trainer: Trainer) {
-        db.save(trainer)
-    }
+//    fun post(trainer: Trainer) {
+//        db.save(trainer)
+//    }
 }

@@ -8,10 +8,10 @@ import pokedex.services.TrainerService
 @RequestMapping("/trainers")
 class TrainerController(val service: TrainerService) {
     @GetMapping
-    fun index(): List<Trainer> = service.findAllTrainers()
-
-    @PostMapping
-    fun post(@RequestBody trainer: Trainer) {
-        service.post(trainer)
-    }
+    fun index(): MutableIterable<Trainer> = service.findAllTrainers()
+//
+//    @PostMapping
+//    fun post(@RequestBody trainer: Trainer) {
+//        service.post(trainer)
+//    }
 }
